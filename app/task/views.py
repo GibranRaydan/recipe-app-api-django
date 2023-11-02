@@ -24,5 +24,6 @@ class TaskViewSet(viewsets.ModelViewSet):
         queryset = self.queryset
         if status:
             status = self._string_to_boolean_status(status)
+            queryset = queryset.filter(status=status).order_by('-id')
 
-        return queryset.filter(status=status).order_by('-id')
+        return queryset
