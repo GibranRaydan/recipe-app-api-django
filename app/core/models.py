@@ -43,3 +43,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
+
+
+class Task(models.Model):
+    """Tasks in the systems"""
+    title = models.CharField(max_length=255)
+    status = models.BooleanField(default=False)
+    description = models.TextField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.title

@@ -4,6 +4,8 @@ Tests for models
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
+from core.models import Task
+
 
 class ModelTests(TestCase):
     """Test models."""
@@ -44,3 +46,12 @@ class ModelTests(TestCase):
             )
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_create_task_model(self):
+        """Test for create a task"""
+        task = Task.objects.create(
+            title='example title',
+            description='This is a description'
+        )
+        task_in_db = Task.objects.get(id=task.id)
+        self.assertEqual(str(task_in_db), task.title)
